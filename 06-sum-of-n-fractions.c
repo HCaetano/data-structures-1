@@ -11,7 +11,6 @@ int main()
 
   for (denominator = 1; denominator <= sequenceSize; denominator++)
   {
-  printf("num: %d, den: %d \n", numerator, denominator);
     numerator -= 3;
     int shouldAdd = denominator % 2 != 0;
 
