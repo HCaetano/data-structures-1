@@ -25,10 +25,8 @@ int main()
         divisors[arrayIndex] = numberInSequence;
         arrayIndex++;
       }
-    printf("%d: Divisors %d: $d\n", arrayIndex, divisors[arrayIndex]);
+    printf("%d: Divisors %d: \n", arrayIndex, divisors[arrayIndex]);
     }
-
-    // printf("%d: Divisors %d: $d\n", numberInSequence);
   }
 
 

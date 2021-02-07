@@ -18,8 +18,6 @@ int main()
     pi += temp;
   }
 
-  // pi = 4 - pi;
-
   printf("The pi sequence is: %d\n", pi);
 
   return 0;
