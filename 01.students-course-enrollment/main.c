@@ -1,89 +1,123 @@
+// struct disciplina Aluno matriculados tem um asterisco
+
 #include <stdio.h>
 #include <string.h>
 
-struct Aluno {
-  int  matricula;
+typedef struct Aluno {
+  int matricula;
   int anoDeIngresso;
   char nome[100];
   char nomePai[100];
   char nomeMae[100];
-  int  matriculadoEm[5];
-} aluno;  
+  char matriculadoEm[5][100];
+} Aluno;  
 
-struct Disciplina {
+typedef struct Disciplina {
   int codDisciplina;
   char nome[100];
   int ano;
   int quantidadeDeAlunos;
   struct Aluno matriculados[50];
-} disciplina;  
+} Disciplina;  
 
-struct Aluno cadastroDeAluno(int matriculaInformada) 
+Aluno cadastroDeAluno(int matriculaInformada);
+Disciplina cadastroDeDisciplina(int codigoDisciplina);
+void mostraAluno(struct Aluno aluno);
+void mostraDisciplina(struct Disciplina disciplina);
+// void matriculaAlunoDisciplina(struct Aluno aluno, struct Disciplina codigoDisciplina);
+void matriculaAlunoDisciplina(Aluno* aluno, Disciplina* codigoDisciplina);
+
+int main()
 {
-  struct Aluno aluno;
-  int matricula = matriculaInformada;
-  int anoDeIngresso;
-  char nome[100];
-  char nomePai[100];
-  char nomeMae[100];
-  int matriculadoEm[5];
+  // char teste[5][100];
+  // strcpy(teste[0], "Pai do Joãozinho");
+  // strcpy(teste[1], "Mãe do Joãozinho");
+  // strcpy(teste[2], "Tia do Joãozinho");
+  // strcpy(teste[3], "Tio do Joãozinho");
+  // strcpy(teste[4], "Neto do Joãozinho");
+  //   printf("Nome: %s\n", teste[0]);
+  //   printf("Nome: %s\n", teste[1]);
+  //   printf("Nome: %s\n", teste[2]);
+  //   printf("Nome: %s\n", teste[3]);
+  //   printf("Nome: %s\n", teste[4]);
 
-  printf("Digite o ano de ingresso deste aluno: ");
-  scanf("%d", &anoDeIngresso);
-  printf("Digite o nome do aluno: ");
-  scanf("%s", &nome);
-  printf("Digite o nome do pai do aluno: ");
-  scanf("%s", &nomePai);
-  printf("Digite o nome da mãe do aluno: ");
-  scanf("%s", &nomeMae);
+  Aluno aluno = cadastroDeAluno(1);
+  Aluno aluno2 = cadastroDeAluno(2);
+  // mostraAluno(aluno);
+  Disciplina disciplina = cadastroDeDisciplina(1);
+  // mostraDisciplina(disciplina);
+  matriculaAlunoDisciplina(&aluno, &disciplina);
+  matriculaAlunoDisciplina(&aluno2, &disciplina);
+  printf("**********\n");
+  printf("Matrícula: %d\n", disciplina.matriculados[0].matricula);
+  printf("Nome: %s\n", disciplina.matriculados[0].nome);
+  printf("Nome: %s\n", disciplina.matriculados[0].nomePai);
+  printf("Nome: %s\n", disciplina.matriculados[0].nomeMae);
+  printf("Posição: %d\n", disciplina.matriculados[0].anoDeIngresso);
+  printf("Disciplina: %s\n", aluno.matriculadoEm[0]);
+  printf("**********\n");
+  printf("Matrícula: %d\n", disciplina.matriculados[1].matricula);
+  printf("Nome: %s\n", disciplina.matriculados[1].nome);
+  printf("Nome: %s\n", disciplina.matriculados[1].nomePai);
+  printf("Nome: %s\n", disciplina.matriculados[1].nomeMae);
+  printf("Posição: %d\n", disciplina.matriculados[1].anoDeIngresso);
+  printf("Inscritos: %d\n", disciplina.quantidadeDeAlunos);
+  printf("Disciplina: %s\n", aluno2.matriculadoEm[0]);
+}
 
-  aluno.matricula = matricula;
-  aluno.anoDeIngresso = anoDeIngresso;
-  strcpy(aluno.nome, nome);
-  strcpy(aluno.nomePai, nomePai);
-  strcpy(aluno.nomeMae, nomeMae);
+void mostraAluno(Aluno aluno)
+{
+  printf("************\n");
+  printf("Matrícula: %d\n", aluno.matricula);
+  printf("Nome: %s\n", aluno.nome);
+  printf("Nome do pai: %s\n", aluno.nomePai);
+  printf("Nome da mamãe: %s\n", aluno.nomeMae);
+}
+
+void mostraDisciplina(struct Disciplina disciplina)
+{
+  printf("************\n");
+  printf("Código da disciplina: %d\n", disciplina.codDisciplina);
+  printf("Título: %s\n", disciplina.nome);
+  printf("Ano: %d\n", disciplina.ano);
+  printf("Quantidade de matriculados: %d\n", disciplina.quantidadeDeAlunos);
+}
+
+Aluno cadastroDeAluno(int matriculaInformada)
+{
+  Aluno aluno;
+  aluno.matricula = matriculaInformada;
+  aluno.anoDeIngresso = 2018;
+  strcpy(aluno.nome, "Joãozinho");
+  strcpy(aluno.nomePai, "Pai do Joãozinho");
+  strcpy(aluno.nomeMae, "Mãe do Joãozinho");
 
   return aluno;
 }
 
-struct Disciplina cadastroDeDisciplina(int codigoInformado, char nomeDaDisciplina) 
+Disciplina cadastroDeDisciplina(int codigoDisciplina)
 {
-  int codDisciplina;
-  char nome[100];
-  int ano;
-  int quantidadeDeAlunos;
-  struct Aluno matriculados[50];
-
-  // printf("Digite o nome da disciplina: ");
-  // scanf("%s", &nome);
-  // printf("Digite o ano de vigência da disciplina: ");
-  // scanf("%d", &ano);
-
-  disciplina.codDisciplina = codigoInformado;
-  strcpy(disciplina.nome, nomeDaDisciplina);
+  Disciplina disciplina;
+  disciplina.codDisciplina = codigoDisciplina;
+  strcpy(disciplina.nome, "Estrutura de Dados I");
+  disciplina.ano = 2018;
+  disciplina.quantidadeDeAlunos = 0;
 
   return disciplina;
 }
 
-void mostraAluno(struct Aluno *aluno)
+void matriculaAlunoDisciplina(Aluno* aluno, Disciplina* disciplina)
 {
-  printf("************\n");
-  printf("Matrícula: %d\n", aluno->matricula);
-  printf("Nome: %s\n", aluno->nome);
-  printf("Nome do pai: %s\n", aluno->nomePai);
-  printf("Nome da mãe: %s\n", aluno->nomeMae);
-}
+  int posicao = disciplina->quantidadeDeAlunos;
+  disciplina->matriculados[posicao] = *aluno;
+  strcpy(aluno->matriculadoEm[0], disciplina->nome);
+  // aluno->matriculadoEm[0] = disciplina->nome;
+  disciplina->quantidadeDeAlunos = disciplina->quantidadeDeAlunos + 1;
 
-int main()
-{
-  struct Aluno aluno = cadastroDeAluno(1);
-  mostraAluno(&aluno);
-  printf("não quebrou");
-  char nome[50] = "nome teste";
-  printf("quebrou?");
-  printf("Nome da disciplina: %s", &nome);
-  struct Disciplina disciplina = cadastroDeDisciplina(1, &nome);
-  printf("Código da disciplina: %d", disciplina.codDisciplina);
-  printf("Título da disciplina: %s", disciplina.nome);
-
+  // printf("**********\n");
+  // printf("Matrícula: %d\n", disciplina.matriculados[posicao].matricula);
+  // printf("Nome: %s\n", disciplina.matriculados[posicao].nome);
+  // printf("Nome: %s\n", disciplina.matriculados[posicao].nomePai);
+  // printf("Nome: %s\n", disciplina.matriculados[posicao].nomeMae);
+  // printf("Posição: %d\n", disciplina.matriculados[posicao].anoDeIngresso);
 }
