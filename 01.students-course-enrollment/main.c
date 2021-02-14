@@ -25,8 +25,15 @@ Disciplina cadastroDeDisciplina(int codigoDisciplina);
 void mostraAluno(struct Aluno aluno);
 void mostraDisciplina(struct Disciplina disciplina);
 void matriculaAlunoDisciplina(Aluno* aluno, Disciplina* codigoDisciplina);
-int removeAlunoDisciplina(int matricula, Disciplina* disciplina);
+int removeAlunoDisciplina(int matricula, struct Disciplina* disciplina);
 int quantidadeDisciplinasPorAluno(Aluno* aluno);
+
+char alunosPreGerados[10][100] = {"Rodrigo", "Rafael", "Gabriel", "Fernando", "Paulo", "Henrique", "Carlos", "Pedro", "João", "Cristiano"};
+char paisPreGerados[10][100] = {"José", "Manoel", "Osvaldo", "Oldenei", "Cláudio", "Plínio", "Aurélio", "César", "Augusto", "Afonso"};
+char maesPreGeradas[10][100] = {"Maria", "Rita", "Cláudia", "Estela", "Luiza", "Joice", "Sandra", "Clementina", "Paula", "Isabel"};
+int posicaoValoresPreGeradosAlunos = 0;
+char disciplinasPreGeradas[10][100] = {"Estrutura de Dados I", "Estrutura de Dados II", "Disciplina Optativa I"};
+int posicaoValoresPreGeradosDisciplinas = 0;
 
 int main()
 {
@@ -87,20 +94,46 @@ int main()
   matriculaAlunoDisciplina(&aluno10, &disciplina2);
   matriculaAlunoDisciplina(&aluno10, &disciplina3);
 
-  // mostraAluno(aluno10);
+  printf("*********************************\n");
+  printf("**********MOSTRA ALUNOS**********\n");
+  printf("*********************************\n\n");
+  mostraAluno(aluno);
+  mostraAluno(aluno2);
+  mostraAluno(aluno3);
+  mostraAluno(aluno4);
+  mostraAluno(aluno5);
+  mostraAluno(aluno6);
+  mostraAluno(aluno7);
+  mostraAluno(aluno8);
+  mostraAluno(aluno9);
+  mostraAluno(aluno10);
+  printf("\n*********************************\n");
+  printf("********MOSTRA DISCIPLINAS*******\n");
+  printf("*********************************\n\n");
   mostraDisciplina(disciplina);
-
-  // printf("************\n");
-  // printf("Disciplina, inscritos: %d\n", disciplina.quantidadeDeAlunos);
-  // int address = removeAlunoDisciplina(3, &disciplina);
-
-  // printf("Endereço removido: %X\n", address);
-  // printf("Disciplina, inscritos: %d\n", disciplina.quantidadeDeAlunos);
+  mostraDisciplina(disciplina2);
+  mostraDisciplina(disciplina3);
+  printf("\n*********************************\n");
+  printf("***********FAZ REMOÇÕES**********\n");
+  printf("*********************************\n");
+  int alunoRemovido1 = removeAlunoDisciplina(4, &disciplina);
+  int alunoRemovido2 = removeAlunoDisciplina(6, &disciplina);
+  int alunoRemovido3 = removeAlunoDisciplina(8, &disciplina);
+  printf("Endereço de memória do aluno removido nº 1: %X\n", alunoRemovido1);
+  printf("Endereço de memória do aluno removido nº 2: %X\n", alunoRemovido2);
+  printf("Endereço de memória do aluno removido nº 3: %X\n", alunoRemovido3);
+  printf("\n*********************************\n");
+  printf("********MOSTRA DISCIPLINA*******\n");
+  printf("*********************************\n\n");
+  mostraDisciplina(disciplina);
+  printf("\n*********************************\n");
+  printf("***************FIM***************\n");
+  printf("*********************************\n\n");
 }
 
 void mostraAluno(Aluno aluno)
 {
-  printf("************\n");
+  printf("********************************************\n");
   printf("Matrícula: %d\n", aluno.matricula);
   printf("Nome: %s\n", aluno.nome);
   printf("Nome do pai: %s\n", aluno.nomePai);
@@ -116,7 +149,7 @@ void mostraAluno(Aluno aluno)
 
 void mostraDisciplina(struct Disciplina disciplina)
 {
-  printf("************\n");
+  printf("*********************************\n");
   printf("Código da disciplina: %d\n", disciplina.codDisciplina);
   printf("Título: %s\n", disciplina.nome);
   printf("Ano: %d\n", disciplina.ano);
@@ -134,9 +167,10 @@ Aluno cadastroDeAluno(int matriculaInformada)
   Aluno aluno;
   aluno.matricula = matriculaInformada;
   aluno.anoDeIngresso = 2018;
-  strcpy(aluno.nome, "Joãozinho");
-  strcpy(aluno.nomePai, "Pai do Joãozinho");
-  strcpy(aluno.nomeMae, "Mãe do Joãozinho");
+  strcpy(aluno.nome, alunosPreGerados[posicaoValoresPreGeradosAlunos]);
+  strcpy(aluno.nomePai, paisPreGerados[posicaoValoresPreGeradosAlunos]);
+  strcpy(aluno.nomeMae, maesPreGeradas[posicaoValoresPreGeradosAlunos]);
+  posicaoValoresPreGeradosAlunos++;
 
   return aluno;
 }
@@ -145,9 +179,10 @@ Disciplina cadastroDeDisciplina(int codigoDisciplina)
 {
   Disciplina disciplina;
   disciplina.codDisciplina = codigoDisciplina;
-  strcpy(disciplina.nome, "Estrutura de Dados I");
+  strcpy(disciplina.nome, disciplinasPreGeradas[posicaoValoresPreGeradosDisciplinas]);
   disciplina.ano = 2021;
   disciplina.quantidadeDeAlunos = 0;
+  posicaoValoresPreGeradosDisciplinas++;
 
   return disciplina;
 }
@@ -171,7 +206,7 @@ void matriculaAlunoDisciplina(Aluno* aluno, Disciplina* disciplina)
   }
 }
 
-int removeAlunoDisciplina(int matricula, Disciplina* disciplina)
+int removeAlunoDisciplina(int matricula, struct Disciplina* disciplina)
 {
   int posicaoParaDeletar = -1;
   for (int posicao = 0; posicao < 50; posicao++)
