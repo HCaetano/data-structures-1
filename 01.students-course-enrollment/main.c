@@ -24,45 +24,77 @@ Aluno cadastroDeAluno(int matriculaInformada);
 Disciplina cadastroDeDisciplina(int codigoDisciplina);
 void mostraAluno(struct Aluno aluno);
 void mostraDisciplina(struct Disciplina disciplina);
-// void matriculaAlunoDisciplina(struct Aluno aluno, struct Disciplina codigoDisciplina);
 void matriculaAlunoDisciplina(Aluno* aluno, Disciplina* codigoDisciplina);
+int removeAlunoDisciplina(int matricula, Disciplina* disciplina);
 
 int main()
 {
-  // char teste[5][100];
-  // strcpy(teste[0], "Pai do Joãozinho");
-  // strcpy(teste[1], "Mãe do Joãozinho");
-  // strcpy(teste[2], "Tia do Joãozinho");
-  // strcpy(teste[3], "Tio do Joãozinho");
-  // strcpy(teste[4], "Neto do Joãozinho");
-  //   printf("Nome: %s\n", teste[0]);
-  //   printf("Nome: %s\n", teste[1]);
-  //   printf("Nome: %s\n", teste[2]);
-  //   printf("Nome: %s\n", teste[3]);
-  //   printf("Nome: %s\n", teste[4]);
-
+  // cria 10 alunos
   Aluno aluno = cadastroDeAluno(1);
   Aluno aluno2 = cadastroDeAluno(2);
-  // mostraAluno(aluno);
+  Aluno aluno3 = cadastroDeAluno(3);
+  Aluno aluno4 = cadastroDeAluno(4);
+  Aluno aluno5 = cadastroDeAluno(5);
+  Aluno aluno6 = cadastroDeAluno(6);
+  Aluno aluno7 = cadastroDeAluno(7);
+  Aluno aluno8 = cadastroDeAluno(8);
+  Aluno aluno9 = cadastroDeAluno(9);
+  Aluno aluno10 = cadastroDeAluno(10);
+  // cria 3 disciplinas
   Disciplina disciplina = cadastroDeDisciplina(1);
-  // mostraDisciplina(disciplina);
+  Disciplina disciplina2 = cadastroDeDisciplina(2);
+  Disciplina disciplina3 = cadastroDeDisciplina(3);
+
+  // cadastra aluno nas três disciplinas
   matriculaAlunoDisciplina(&aluno, &disciplina);
+  matriculaAlunoDisciplina(&aluno, &disciplina2);
+  matriculaAlunoDisciplina(&aluno, &disciplina3);
+  // cadastra aluno2 nas três disciplinas
   matriculaAlunoDisciplina(&aluno2, &disciplina);
-  printf("**********\n");
-  printf("Matrícula: %d\n", disciplina.matriculados[0].matricula);
-  printf("Nome: %s\n", disciplina.matriculados[0].nome);
-  printf("Nome: %s\n", disciplina.matriculados[0].nomePai);
-  printf("Nome: %s\n", disciplina.matriculados[0].nomeMae);
-  printf("Posição: %d\n", disciplina.matriculados[0].anoDeIngresso);
-  printf("Disciplina: %s\n", aluno.matriculadoEm[0]);
-  printf("**********\n");
-  printf("Matrícula: %d\n", disciplina.matriculados[1].matricula);
-  printf("Nome: %s\n", disciplina.matriculados[1].nome);
-  printf("Nome: %s\n", disciplina.matriculados[1].nomePai);
-  printf("Nome: %s\n", disciplina.matriculados[1].nomeMae);
-  printf("Posição: %d\n", disciplina.matriculados[1].anoDeIngresso);
-  printf("Inscritos: %d\n", disciplina.quantidadeDeAlunos);
-  printf("Disciplina: %s\n", aluno2.matriculadoEm[0]);
+  matriculaAlunoDisciplina(&aluno2, &disciplina2);
+  matriculaAlunoDisciplina(&aluno2, &disciplina3);
+  // cadastra aluno3 nas três disciplinas
+  matriculaAlunoDisciplina(&aluno3, &disciplina);
+  matriculaAlunoDisciplina(&aluno3, &disciplina2);
+  matriculaAlunoDisciplina(&aluno3, &disciplina3);
+  // cadastra aluno4 nas três disciplinas
+  matriculaAlunoDisciplina(&aluno4, &disciplina);
+  matriculaAlunoDisciplina(&aluno4, &disciplina2);
+  matriculaAlunoDisciplina(&aluno4, &disciplina3);
+  // cadastra aluno5 nas três disciplinas
+  matriculaAlunoDisciplina(&aluno5, &disciplina);
+  matriculaAlunoDisciplina(&aluno5, &disciplina2);
+  matriculaAlunoDisciplina(&aluno5, &disciplina3);
+  // cadastra aluno6 nas três disciplinas
+  matriculaAlunoDisciplina(&aluno6, &disciplina);
+  matriculaAlunoDisciplina(&aluno6, &disciplina2);
+  matriculaAlunoDisciplina(&aluno6, &disciplina3);
+  // cadastra aluno7 nas três disciplinas
+  matriculaAlunoDisciplina(&aluno7, &disciplina);
+  matriculaAlunoDisciplina(&aluno7, &disciplina2);
+  matriculaAlunoDisciplina(&aluno7, &disciplina3);
+  // cadastra aluno8 nas três disciplinas
+  matriculaAlunoDisciplina(&aluno8, &disciplina);
+  matriculaAlunoDisciplina(&aluno8, &disciplina2);
+  matriculaAlunoDisciplina(&aluno8, &disciplina3);
+  // cadastra aluno9 nas três disciplinas
+  matriculaAlunoDisciplina(&aluno9, &disciplina);
+  matriculaAlunoDisciplina(&aluno9, &disciplina2);
+  matriculaAlunoDisciplina(&aluno9, &disciplina3);
+  // cadastra aluno10 nas três disciplinas
+  matriculaAlunoDisciplina(&aluno10, &disciplina);
+  matriculaAlunoDisciplina(&aluno10, &disciplina2);
+  matriculaAlunoDisciplina(&aluno10, &disciplina3);
+
+  // mostraAluno(aluno);
+  // mostraDisciplina(disciplina);
+
+  printf("************\n");
+  printf("Disciplina, inscritos: %d\n", disciplina.quantidadeDeAlunos);
+  int address = removeAlunoDisciplina(3, &disciplina);
+
+  printf("Endereço removido: %X\n", address);
+  printf("Disciplina, inscritos: %d\n", disciplina.quantidadeDeAlunos);
 }
 
 void mostraAluno(Aluno aluno)
@@ -108,16 +140,51 @@ Disciplina cadastroDeDisciplina(int codigoDisciplina)
 
 void matriculaAlunoDisciplina(Aluno* aluno, Disciplina* disciplina)
 {
-  int posicao = disciplina->quantidadeDeAlunos;
-  disciplina->matriculados[posicao] = *aluno;
-  strcpy(aluno->matriculadoEm[0], disciplina->nome);
-  // aluno->matriculadoEm[0] = disciplina->nome;
-  disciplina->quantidadeDeAlunos = disciplina->quantidadeDeAlunos + 1;
+  int quantidadeDisciplinas = 0;
+  for (int posicao = 0; posicao < 5; posicao++)
+  {
+    if (strcmp(aluno->matriculadoEm[posicao], "") != 0)
+    {
+      quantidadeDisciplinas++;
+    }
+  }
+  
+  if (quantidadeDisciplinas < 5)
+  {
+    int posicao = disciplina->quantidadeDeAlunos;
+    disciplina->matriculados[posicao] = *aluno;
+    strcpy(aluno->matriculadoEm[quantidadeDisciplinas], disciplina->nome);
+    disciplina->quantidadeDeAlunos = disciplina->quantidadeDeAlunos + 1;
+  }
+  else
+  {
+    printf("************\n");
+    printf("O aluno %s já atingiu o limite de disciplinas.\n", aluno->nome);
+    printf("************\n");
+  }
+}
 
-  // printf("**********\n");
-  // printf("Matrícula: %d\n", disciplina.matriculados[posicao].matricula);
-  // printf("Nome: %s\n", disciplina.matriculados[posicao].nome);
-  // printf("Nome: %s\n", disciplina.matriculados[posicao].nomePai);
-  // printf("Nome: %s\n", disciplina.matriculados[posicao].nomeMae);
-  // printf("Posição: %d\n", disciplina.matriculados[posicao].anoDeIngresso);
+int removeAlunoDisciplina(int matricula, Disciplina* disciplina)
+{
+  int posicaoParaDeletar = -1;
+  for (int posicao = 0; posicao < 50; posicao++)
+  {
+    if (disciplina->matriculados[posicao].matricula == matricula)
+    {
+      posicaoParaDeletar = posicao;
+    }
+  }
+
+  // printf("Endereço de memória do aluno removido: %p\n", (void*)&disciplina->matriculados[posicaoParaDeletar]);
+  int memoryAdress = &disciplina->matriculados[posicaoParaDeletar];
+  // printf("Endereço de memória do aluno removido: %X\n", memoryAdress);
+
+  for(int posicao = posicaoParaDeletar - 1; posicao < (50 - 1); posicao++)
+    {
+      disciplina->matriculados[posicao] = disciplina->matriculados[posicao + 1];
+    }
+
+    disciplina->quantidadeDeAlunos = disciplina->quantidadeDeAlunos - 1;
+
+    return memoryAdress;
 }
