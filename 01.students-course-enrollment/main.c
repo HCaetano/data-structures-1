@@ -26,7 +26,7 @@ void mostraAluno(struct Aluno aluno);
 void mostraDisciplina(struct Disciplina disciplina);
 void matriculaAlunoDisciplina(Aluno* aluno, Disciplina* codigoDisciplina);
 int removeAlunoDisciplina(int matricula, Disciplina* disciplina);
-int quantidadeDisciplinasAluno(Aluno* aluno);
+int quantidadeDisciplinasPorAluno(Aluno* aluno);
 
 int main()
 {
@@ -88,7 +88,7 @@ int main()
   matriculaAlunoDisciplina(&aluno10, &disciplina3);
 
   // mostraAluno(aluno10);
-  // mostraDisciplina(disciplina);
+  mostraDisciplina(disciplina);
 
   // printf("************\n");
   // printf("Disciplina, inscritos: %d\n", disciplina.quantidadeDeAlunos);
@@ -106,7 +106,7 @@ void mostraAluno(Aluno aluno)
   printf("Nome do pai: %s\n", aluno.nomePai);
   printf("Nome da mãe: %s\n", aluno.nomeMae);
 
-  int quantidade = quantidadeDisciplinasAluno(&aluno);
+  int quantidade = quantidadeDisciplinasPorAluno(&aluno);
   for (int posicao = 0; posicao < quantidade; posicao++)
   {
     printf("Título da disciplina %d: %s\n", posicao + 1, aluno.matriculadoEm[posicao]);
@@ -121,6 +121,12 @@ void mostraDisciplina(struct Disciplina disciplina)
   printf("Título: %s\n", disciplina.nome);
   printf("Ano: %d\n", disciplina.ano);
   printf("Quantidade de matriculados: %d\n", disciplina.quantidadeDeAlunos);
+
+  int quantidadeDeAlunos = disciplina.quantidadeDeAlunos;
+  for (int posicao = 0; posicao < quantidadeDeAlunos; posicao++)
+  {
+    printf("Nome do aluno nº %d: %s\n", posicao + 1, disciplina.matriculados[posicao].nome);
+  }
 }
 
 Aluno cadastroDeAluno(int matriculaInformada)
@@ -148,7 +154,7 @@ Disciplina cadastroDeDisciplina(int codigoDisciplina)
 
 void matriculaAlunoDisciplina(Aluno* aluno, Disciplina* disciplina)
 {
-  int quantidadeDisciplinas = quantidadeDisciplinasAluno(aluno);
+  int quantidadeDisciplinas = quantidadeDisciplinasPorAluno(aluno);
   
   if (quantidadeDisciplinas < 5)
   {
@@ -188,7 +194,7 @@ int removeAlunoDisciplina(int matricula, Disciplina* disciplina)
     return memoryAdress;
 }
 
-int quantidadeDisciplinasAluno(Aluno* aluno)
+int quantidadeDisciplinasPorAluno(Aluno* aluno)
 {
   int quantidadeDisciplinas = 0;
   for (int posicao = 0; posicao < 5; posicao++)
