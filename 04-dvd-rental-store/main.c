@@ -29,7 +29,31 @@ typedef struct locacao {
   float total;
 } Locacao;  
 
+char clientesPreGerados[10][100] = {"Rodrigo", "Rafael", "Gabriel", "Fernando", "Paulo"};
+int posicaoValoresPreGeradosClientes = 0;
+
+Cliente cadastraCliente();
+void mostraCliente(Cliente cliente);
+
 int main()
 {
+  Cliente cliente = cadastraCliente();
+  mostraCliente(cliente);
+}
 
+Cliente cadastraCliente()
+{
+  Cliente cliente;
+  cliente.cod = posicaoValoresPreGeradosClientes;
+  strcpy(cliente.nome, clientesPreGerados[posicaoValoresPreGeradosClientes]);
+  posicaoValoresPreGeradosClientes++;
+
+  return cliente;
+}
+
+void mostraCliente(Cliente cliente)
+{
+  printf("********************************************\n");
+  printf("Código: %d\n", cliente.cod);
+  printf("Nome: %s\n", cliente.nome);
 }
