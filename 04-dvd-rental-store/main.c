@@ -31,14 +31,20 @@ typedef struct locacao {
 
 char clientesPreGerados[10][100] = {"Rodrigo", "Rafael", "Gabriel", "Fernando", "Paulo"};
 int posicaoValoresPreGeradosClientes = 0;
+char dvdsPreGerados[10][100] = {"Gladiador", "Avatar", "Alien", "Tubarão", "Titanic"};
+int posicaoValoresPreGeradosDvds = 0;
 
 Cliente cadastraCliente();
 void mostraCliente(Cliente cliente);
+Dvd cadastraDvd();
+void mostraDvd(Dvd dvd);
 
 int main()
 {
   Cliente cliente = cadastraCliente();
   mostraCliente(cliente);
+  Dvd dvd = cadastraDvd();
+  mostraDvd(dvd);
 }
 
 Cliente cadastraCliente()
@@ -53,7 +59,28 @@ Cliente cadastraCliente()
 
 void mostraCliente(Cliente cliente)
 {
-  printf("********************************************\n");
+  printf("********** Cliente **********\n");
   printf("Código: %d\n", cliente.cod);
   printf("Nome: %s\n", cliente.nome);
+}
+
+Dvd cadastraDvd()
+{
+  Dvd dvd;
+  dvd.cod = posicaoValoresPreGeradosDvds;
+  strcpy(dvd.titulo, dvdsPreGerados[posicaoValoresPreGeradosDvds]);
+  dvd.ano = 2000 + posicaoValoresPreGeradosDvds;
+  dvd.status = 0;
+  posicaoValoresPreGeradosDvds++;
+
+  return dvd;
+}
+
+void mostraDvd(Dvd dvd)
+{
+  printf("********** DVD **********\n");
+  printf("Código: %d\n", dvd.cod);
+  printf("Título: %s\n", dvd.titulo);
+  printf("Ano de lançamento: %d\n", dvd.ano);
+  printf("Status: %s\n", dvd.status == 0 ? "disponível" : "alugado" );
 }
