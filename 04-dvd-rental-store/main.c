@@ -2,22 +2,22 @@
 #include <string.h>
 
 typedef struct endereco {
-  int cep;
+  char nomeRua[15];
   int numero;
-  char nomeRua[100];
+  int cep;
 } Endereco;  
 
 typedef struct cliente {
   int cod;
-  int numero;
-  char nome[100];
+  char nome[10];
+  Endereco end;
 } Cliente;  
 
 typedef struct dvd {
   int cod;
+  char titulo[10];
   int ano;
   int status;
-  char titulo[100];
 } Dvd;  
 
 typedef struct locacao {
@@ -31,5 +31,5 @@ typedef struct locacao {
 
 int main()
 {
-  
+
 }
