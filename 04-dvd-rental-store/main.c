@@ -29,12 +29,25 @@ typedef struct locacao {
   float total;
 } Locacao;  
 
-char clientesPreGerados[10][100] = {"Rodrigo", "Rafael", "Gabriel", "Fernando", "Paulo"};
+char enderecosPreGerados[5][40] = 
+{
+  "Avenida Pelotas",
+  "Rua Ulysses Guimarães",
+  "Avenida Roberto Socowski",
+  "Travessa Pereira Lima",
+  "Rua Irmão Oliva"
+};
+int posicaoEnderecosPreGerados = 0;
+int cepsPreGerados[5] = {96214251, 96214154, 96214789, 96214963, 96214357};
+int posicaoCepsPreGerados = 0;
+char clientesPreGerados[5][20] = {"Isadora", "Maria", "Gabriel", "Fernando", "Paulo"};
 int posicaoClientesPreGerados = 0;
-char dvdsPreGerados[10][100] = {"Gladiador", "Avatar", "Alien", "Tubarão", "Titanic"};
+char dvdsPreGerados[5][20] = {"Gladiador", "Avatar", "Alien", "Tubarão", "Titanic"};
 int posicaoDvsPreGerados = 0;
 int posicaoLocacoesPreGeradas = 0;
 
+Endereco cadastraEndereco();
+void mostraEndereco(Endereco endereco);
 Cliente cadastraCliente();
 void mostraCliente(Cliente cliente);
 Dvd cadastraDvd();
@@ -44,7 +57,9 @@ void mostraLocacao(Locacao Locacao);
 
 int main()
 {
-  Cliente cliente = cadastraCliente();
+  Endereco endereco = cadastraEndereco();
+  mostraEndereco(endereco);
+  Cliente cliente = cadastraCliente(&endereco);
   mostraCliente(cliente);
   Dvd dvd = cadastraDvd();
   mostraDvd(dvd);
@@ -52,11 +67,31 @@ int main()
   mostraLocacao(locacao);
 }
 
-Cliente cadastraCliente()
+Endereco cadastraEndereco()
+{
+  Endereco endereco;
+  endereco.numero = posicaoEnderecosPreGerados;
+  endereco.cep = cepsPreGerados[posicaoCepsPreGerados];
+  strcpy(endereco.nomeRua, enderecosPreGerados[posicaoEnderecosPreGerados]);
+  posicaoEnderecosPreGerados++;
+
+  return endereco;
+}
+
+void mostraEndereco(Endereco endereco)
+{
+  printf("********** Endereco **********\n");
+  printf("Nome da rua: %s\n", endereco.nomeRua);
+  printf("Número da residência: %d\n", endereco.numero);
+  printf("CEP: %d\n", endereco.cep);
+}
+
+Cliente cadastraCliente(Endereco *endereco)
 {
   Cliente cliente;
   cliente.cod = posicaoClientesPreGerados;
   strcpy(cliente.nome, clientesPreGerados[posicaoClientesPreGerados]);
+  cliente.end = *endereco;
   posicaoClientesPreGerados++;
 
   return cliente;
@@ -67,6 +102,7 @@ void mostraCliente(Cliente cliente)
   printf("********** Cliente **********\n");
   printf("Código: %d\n", cliente.cod);
   printf("Nome: %s\n", cliente.nome);
+  mostraEndereco(cliente.end);
 }
 
 Dvd cadastraDvd()
@@ -111,12 +147,6 @@ void mostraLocacao(Locacao locacao)
   printf("Duração (em dias): %d\n", locacao.duracao);
   printf("Diária: %.2f\n", locacao.valor);
   printf("Custo por %d dias: %.2f\n", locacao.duracao, locacao.total);
-  printf("********** Dados do cliente **********\n");
-  printf("Código: %d\n", locacao.cli->cod);
-  printf("Cliente: %s\n", locacao.cli->nome);
-  // Endereco end;
-  printf("********** Dados do DVD **********\n");
-  printf("Código: %d\n", locacao.dvd->cod);
-  printf("DVD: %s\n", locacao.dvd->titulo);
-  printf("Ano de lançamento: %d\n", locacao.dvd->ano);
+  mostraCliente(*locacao.cli);
+  mostraDvd(*locacao.dvd);
 }
