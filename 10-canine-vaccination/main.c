@@ -22,7 +22,7 @@ typedef struct cao{
 }Cao;
 
 void mostraData(Data data){
-   
+  printf("%d/%d/%d (dd/mm/aaaa)\n", data.dia, data.mes, data.ano);
 }
 
 void mostraVacina(Vacina vacina){
@@ -79,7 +79,8 @@ int main()
   system("clear");
   setlocale(LC_ALL, "");   
 
-  // Data data = cadastraData(1, 6, 2020);
+  Data data = cadastraData(1, 6, 2020);
+  mostraData(data);
   // printf("dia: %d\n", data.dia); 
   // printf("mês: %d\n", data.mes); 
   // printf("ano: %d\n", data.ano); 
