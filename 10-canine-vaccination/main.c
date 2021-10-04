@@ -41,23 +41,6 @@ Data cadastraData(int dia, int mes, int ano){
   return data;
 }
 
-// Aluno cadastroDeAluno(int matriculaInformada)
-// {
-//   Aluno aluno;
-//   aluno.matricula = matriculaInformada;
-//   aluno.anoDeIngresso = 2018;
-//   strcpy(aluno.nome, alunosPreGerados[posicaoValoresPreGeradosAlunos]);
-//   strcpy(aluno.nomePai, paisPreGerados[posicaoValoresPreGeradosAlunos]);
-//   strcpy(aluno.nomeMae, maesPreGeradas[posicaoValoresPreGeradosAlunos]);
-//   posicaoValoresPreGeradosAlunos++;
-
-//   return aluno;
-// }
-
-  // char nome [20];
-  // char fabricante [20];
-  // Data validade;
-
 void cadastraVacina(Vacina *vacina){
   strcpy(vacina->nome, "antirrábica");
   strcpy(vacina->fabricante, "EMS");
@@ -65,7 +48,10 @@ void cadastraVacina(Vacina *vacina){
 }
 
 void cadastraCao(Cao *cao){
-
+  strcpy(cao->nome, "Bolinha");
+  cao->idade = 1;
+  cao->dataDeNascimento = cadastraData(1, 1, 2020);
+  cao->quantidadeVacinas = 0;
 }
 
 void vacinacao(Cao *cao, Vacina vacina){
@@ -82,8 +68,8 @@ int main()
   Data data = cadastraData(1, 6, 2020);
   // mostraData(data);
 
-  // Cao bolinha, preta, cristal, marley; 
-  // cadastraCao(&bolinha);
+  Cao bolinha, preta, cristal, marley; 
+  cadastraCao(&bolinha);
   // cadastraCao(&marley);
 
   Vacina vacinas[4];
