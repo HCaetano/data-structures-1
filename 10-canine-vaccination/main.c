@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <locale.h> /*alara acentuação*/
+#include <locale.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -53,7 +53,15 @@ Data cadastraData(int dia, int mes, int ano){
 //   return aluno;
 // }
 
+  // char nome [20];
+  // char fabricante [20];
+  // Data validade;
+
 void cadastraVacina(Vacina *vacina){
+  Vacina novaVacina = *vacina;
+  strcpy(novaVacina.nome, "antirrábica");
+  strcpy(novaVacina.fabricante, "EMS");
+  novaVacina.validade = cadastraData(1, 6, 2020);
 }
 
 void cadastraCao(Cao *cao){
@@ -71,17 +79,17 @@ int main()
   system("clear");
   setlocale(LC_ALL, "");   
 
-  Data data = cadastraData(1, 6, 2020);
-  printf("dia: %d\n", data.dia); 
-  printf("mês: %d\n", data.mes); 
-  printf("ano: %d\n", data.ano); 
+  // Data data = cadastraData(1, 6, 2020);
+  // printf("dia: %d\n", data.dia); 
+  // printf("mês: %d\n", data.mes); 
+  // printf("ano: %d\n", data.ano); 
 
   // Cao bolinha, preta, cristal, marley; 
   // cadastraCao(&bolinha);
   // cadastraCao(&marley);
 
-  // Vacina vacinas[4];
-  // cadastraVacina(vacinas);
+  Vacina vacinas[4];
+  cadastraVacina(vacinas);
   // cadastraVacina(vacinas+1);
   // cadastraVacina(&(vacinas[2])); 
   // cadastraVacina(&(vacinas[3]));
