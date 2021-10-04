@@ -26,6 +26,7 @@ void mostraData(Data data){
 }
 
 void mostraVacina(Vacina vacina){
+  printf("Vacina %s. Fabricante: %s, validade: %d/%d/%d.\n", vacina.nome, vacina.fabricante, vacina.validade.dia, vacina.validade.mes, vacina.validade.ano);
 }
 
 void mostraDadosCao(Cao cao){
@@ -58,10 +59,9 @@ Data cadastraData(int dia, int mes, int ano){
   // Data validade;
 
 void cadastraVacina(Vacina *vacina){
-  Vacina novaVacina = *vacina;
-  strcpy(novaVacina.nome, "antirrábica");
-  strcpy(novaVacina.fabricante, "EMS");
-  novaVacina.validade = cadastraData(1, 6, 2020);
+  strcpy(vacina->nome, "antirrábica");
+  strcpy(vacina->fabricante, "EMS");
+  vacina->validade = cadastraData(1, 6, 2020);
 }
 
 void cadastraCao(Cao *cao){
@@ -80,10 +80,7 @@ int main()
   setlocale(LC_ALL, "");   
 
   Data data = cadastraData(1, 6, 2020);
-  mostraData(data);
-  // printf("dia: %d\n", data.dia); 
-  // printf("mês: %d\n", data.mes); 
-  // printf("ano: %d\n", data.ano); 
+  // mostraData(data);
 
   // Cao bolinha, preta, cristal, marley; 
   // cadastraCao(&bolinha);
@@ -91,7 +88,8 @@ int main()
 
   Vacina vacinas[4];
   cadastraVacina(vacinas);
-  // cadastraVacina(vacinas+1);
+  // mostraVacina(vacinas[0]);
+  cadastraVacina(vacinas+1);
   // cadastraVacina(&(vacinas[2])); 
   // cadastraVacina(&(vacinas[3]));
   
