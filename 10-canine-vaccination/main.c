@@ -56,8 +56,11 @@ void cadastraVacina(Vacina *vacina){
   vacina->validade = cadastraData(1, 6, 2024);
 }
 
+char a[2][15] = {"bolinha", "mia"};
+int i = 0;
 void cadastraCao(Cao *cao){
-  strcpy(cao->nome, "Bolinha");
+  strcpy(cao->nome, a[i]);
+  i++;
   cao->idade = 1;
   cao->dataDeNascimento = cadastraData(1, 1, 2020);
   cao->quantidadeVacinas = 0;
@@ -69,7 +72,15 @@ void vacinacao(Cao *cao, Vacina vacina){
 }
 
 Cao* cruzamento(Cao pai, Cao mae){
-  // Cao filhote;
+  Cao* filhote;
+  printf("Cruzamento de %s e %s.\n", pai.nome, mae.nome);
+  strcpy(filhote->nome, pai.nome);
+  strcat(filhote->nome, mae.nome);
+  filhote->idade = 0;
+  filhote->dataDeNascimento = cadastraData(4, 10, 2021);
+  filhote->quantidadeVacinas = 0;
+
+  return filhote;
 }
 
 int main()
@@ -81,9 +92,12 @@ int main()
   // mostraData(data);
 
   Cao bolinha, preta, cristal, marley; 
-  cadastraCao(&bolinha);
+  // cadastraCao(&bolinha);
   // mostraDadosCao(bolinha);
-  // cadastraCao(&marley);
+  cadastraCao(&marley);
+  cadastraCao(&cristal);
+    // mostraDadosCao(marley);
+    // mostraDadosCao(cristal);
 
   Vacina vacinas[4];
   cadastraVacina(vacinas);
@@ -94,8 +108,8 @@ int main()
   // mostraVacina(vacinas[3]);
 
   // mostraDadosCao(bolinha);  
-  vacinacao(&bolinha,vacinas[0]);
-  mostraDadosCao(bolinha);
+  // vacinacao(&bolinha,vacinas[0]);
+  // mostraDadosCao(bolinha);
 
   // vacinacao(&bolinha,vacinas[2]);
   // mostraDadosCao(bolinha);
@@ -109,9 +123,9 @@ int main()
   // vacinacao(&marley,vacinas[3]);
   // mostraDadosCao(marley);
 
-  // Cao *junior = cruzamento(marley,cristal);    
+  Cao *junior = cruzamento(marley,cristal);    
   // vacinacao(junior,vacinas[0]); 
-  // mostraDadosCao(*junior);
+  mostraDadosCao(*junior);
 
   exit(0);
 }
